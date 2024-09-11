@@ -1,0 +1,95 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis:latest
+    container_name: redis-server
+    ports:
+      - "6379:6379"
+
+    volumes:
+      - redis_data:/data
+    restart: always
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  mysql:
+    image: mysql:lts
+    container_name: mysql-server
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: mysecretpassword
+      MYSQL_DATABASE: shopsmart
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  server:
+    build:
+      context: .
+    environment:
+      NODE_ENV: production
+      DB_PORT: 3306
+      DB_HOST: mysql
+      REDIS_HOST: redis
+    env_file:
+      - .env
+    command: [sh, -c, "npm run migrate && npm start"]
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/app
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  worker:
+    build:
+      context: .
+    environment:
+      NODE_ENV: production
+      DB_PORT: 3306
+      DB_HOST: mysql
+      REDIS_HOST: redis
+    env_file:
+      - .env
+    command: npm run worker
+    volumes:
+      - .:/app
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  caddy:
+    image: caddy/caddy:2.2.1-alpine
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile
+      - $PWD/Caddy:/srv
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  redis_data:
+  mysql_data:
+  caddy_data:
+  caddy_config:

@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.light {
+  --background: 255, 255, 255;
+  --backgroundBody: 255, 255, 255;
+  --inputField: 209, 213, 219;
+  --text: 17, 24, 39;
+  --productTitle: 3, 7, 18;
+  --productBrand: 55, 65, 81;
+  --productCurrPrice: 17, 24, 39;
+  --productSubPrices: 107, 114, 128;
+  --productInfo: 3, 7, 18;
+  --productRemove: 75, 85, 99;
+  --productBuy: 0, 0, 0;
+  --mainSVG: 0, 0, 0;
+  --modalTitle: 17, 24, 39;
+  --modalSVGCancel: 75, 85, 99;
+  --modalSVGSubmit: 0, 0, 0;
+
+  --accentColorDark: 103, 170, 249;
+  --accentColorLight: 137, 190, 250;
+}
+
+.dark {
+  --background: 39, 39, 42;
+  --backgroundBody: 24, 24, 27;
+  --inputField: 63, 63, 70;
+  --text: 255, 255, 255;
+  --productTitle: 255, 255, 255;
+  --productBrand: 228, 228, 231;
+  --productCurrPrice: 255, 255, 255;
+  --productSubPrices: 228, 228, 231;
+  --productInfo: 255, 255, 255;
+  --productRemove: 212, 212, 216;
+  --productBuy: 255, 255, 255;
+  --mainSVG: 255, 255, 255;
+  --modalTitle: 255, 255, 255;
+  --modalSVGCancel: 212, 212, 216;
+  --modalSVGSubmit: 255, 255, 255;
+
+  --accentColorDark: 103, 170, 249;
+  --accentColorLight: 137, 190, 250;
+}
+/* 109, 152, 186 */
+/* 155, 197, 61 */
+/* 103, 170, 249 */
+/* 151, 219, 79 */

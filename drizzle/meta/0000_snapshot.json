@@ -1,0 +1,226 @@
+{
+  "version": "5",
+  "dialect": "mysql",
+  "id": "145c5b2f-1344-47b7-b70e-b619d6e33c0f",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "ProductPrices": {
+      "name": "ProductPrices",
+      "columns": {
+        "priceID": {
+          "name": "priceID",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "productID": {
+          "name": "productID",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "priceDate": {
+          "name": "priceDate",
+          "type": "varchar(1000)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "price": {
+          "name": "price",
+          "type": "varchar(1000)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ProductPrices_productID_Products_productID_fk": {
+          "name": "ProductPrices_productID_Products_productID_fk",
+          "tableFrom": "ProductPrices",
+          "tableTo": "Products",
+          "columnsFrom": [
+            "productID"
+          ],
+          "columnsTo": [
+            "productID"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "ProductPrices_priceID": {
+          "name": "ProductPrices_priceID",
+          "columns": [
+            "priceID"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "Products": {
+      "name": "Products",
+      "columns": {
+        "productID": {
+          "name": "productID",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "userID": {
+          "name": "userID",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "productLink": {
+          "name": "productLink",
+          "type": "varchar(1000)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "productName": {
+          "name": "productName",
+          "type": "varchar(1000)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "productBrand": {
+          "name": "productBrand",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "productImage": {
+          "name": "productImage",
+          "type": "varchar(1000)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "productUpdateDate": {
+          "name": "productUpdateDate",
+          "type": "varchar(1000)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "currPrice": {
+          "name": "currPrice",
+          "type": "varchar(11)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "lowestPrice": {
+          "name": "lowestPrice",
+          "type": "varchar(11)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "originalPrice": {
+          "name": "originalPrice",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Products_userID_Users_userID_fk": {
+          "name": "Products_userID_Users_userID_fk",
+          "tableFrom": "Products",
+          "tableTo": "Users",
+          "columnsFrom": [
+            "userID"
+          ],
+          "columnsTo": [
+            "userID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "Products_productID": {
+          "name": "Products_productID",
+          "columns": [
+            "productID"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "Users": {
+      "name": "Users",
+      "columns": {
+        "userID": {
+          "name": "userID",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "userEmail": {
+          "name": "userEmail",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "userName": {
+          "name": "userName",
+          "type": "varchar(1000)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "userPassword": {
+          "name": "userPassword",
+          "type": "varchar(1000)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "Users_userID": {
+          "name": "Users_userID",
+          "columns": [
+            "userID"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "Users_userEmail_unique": {
+          "name": "Users_userEmail_unique",
+          "columns": [
+            "userEmail"
+          ]
+        }
+      }
+    }
+  },
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "tables": {},
+    "indexes": {}
+  }
+}

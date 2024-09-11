@@ -1,0 +1,6 @@
+caddy.shopsmart.dev {
+    reverse_proxy server:4000 {
+        header_down Script-Transport-Security max-age=31536000;
+    }
+}
+
