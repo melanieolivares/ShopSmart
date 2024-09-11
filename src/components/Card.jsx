@@ -49,7 +49,7 @@ export default function Card({
                 className="h-52 w-full object-cover rounded"
               />
               {/* Overlay text */}
-              <div className="absolute rounded inset-0 flex items-center justify-center text-center font-bold text-md bg-black/75 text-productCurrPrice/75 opacity-0 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+              <div className="absolute rounded inset-0 flex items-center justify-center text-center font-bold text-md bg-black/75 text-white/75 opacity-0 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
                 click to see price history
               </div>
             </div>
@@ -64,13 +64,13 @@ export default function Card({
                 <p className="text-sm font-bold text-productCurrPrice/25">
                   lowest price
                 </p>
-                <p className="text-xl font-semibold">{productLowestPrice}</p>
+                <p className="text-2xl font-semibold">{productLowestPrice}</p>
               </div>
               <div className="text-productSubPrices font-normal">
                 <p className="text-xs font-semibold text-productCurrPrice/25">
                   original price{" "}
                 </p>
-                <p className="text-xl font-medium">{productOgPrice}</p>
+                <p className="text-2xl font-medium">{productOgPrice}</p>
               </div>
 
               {/* <div className="flex justify-center w-full h-full mb-4 mt-2">

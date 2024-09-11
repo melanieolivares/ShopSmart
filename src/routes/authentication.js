@@ -71,6 +71,7 @@ router.post("/login", async (req, res) => {
       .where(
         sql`${Users.userEmail} = ${userData.email} and ${Users.userPassword} = ${userData.password}`
       );
+
     if (user.length > 0) {
       const token = jwt.sign({ userID: user[0].userID }, "your-secret-key", {
         expiresIn: "7d",
@@ -81,7 +82,7 @@ router.post("/login", async (req, res) => {
         sameSite: "none",
       });
 
-      return res.status(200).json({ token });
+      return res.status(200).json({ token, userName: user[0].userName });
     } else {
       return res.status(400).json({ error: "Email/password is incorrect." });
     }

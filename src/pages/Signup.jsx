@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -9,6 +9,10 @@ import { useTheme } from "../context/ThemeContext";
 export default function Signup() {
   const navigate = useNavigate();
   const { theme } = useTheme();
+
+  useEffect(() => {
+    toast.dismiss();
+  }, []);
 
   const [userData, setUserData] = useState({
     email: "",

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -6,12 +6,18 @@ import logo from "../assets/shopsmart.png";
 import videoBackground from "../assets/854100-hd_1920_1080_25fps.mp4";
 import { useTheme } from "../context/ThemeContext";
 import { useAuth } from "../context/AuthContext";
+import { useCookies } from "react-cookie";
 
 export default function Login() {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({ email: "", password: "" });
   const { theme } = useTheme();
   const { setIsAuthenticated } = useAuth();
+  const [cookies, setCookie] = useCookies(["userName"]);
+
+  useEffect(() => {
+    toast.dismiss();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,6 +47,7 @@ export default function Login() {
         toast.error(data.error);
       } else if (response.ok) {
         setIsAuthenticated(true);
+        setCookie("userName", data.userName);
         navigate("/products");
       }
     } catch (error) {

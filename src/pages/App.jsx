@@ -7,13 +7,14 @@ import toast, { Toaster } from "react-hot-toast";
 import { useTheme } from "../context/ThemeContext";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-
+import { useCookies } from "react-cookie";
 export default function App() {
   const [url, setUrl] = useState("");
   const [products, setProducts] = useState([]);
   const [urlModalVisibility, setUrlModalVisibility] = useState(false);
   const { theme } = useTheme();
   const { isAuthenticated } = useAuth();
+  const [cookies] = useCookies(["userName"]);
 
   const navigate = useNavigate();
 
@@ -46,6 +47,9 @@ export default function App() {
   };
 
   useEffect(() => {
+    toast.dismiss();
+    const userName = cookies.userName;
+    toast(`Welcome back, ${userName}!`, { icon: "👋" });
     fetchProducts();
   }, []);
 
@@ -133,8 +137,6 @@ export default function App() {
   return (
     <div className={`${theme} h-screen flex flex-col`}>
       <Toaster />
-      {/* <Navbar /> */}
-
       <div className="flex-grow overflow-auto p-[2rem] bg-backgroundBody">
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
           {products.map((product) => (

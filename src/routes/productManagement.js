@@ -330,8 +330,6 @@ router.get("/products", async (req, res) => {
       }
     }
 
-    // TODO: FIX THIS
-
     const products = await db
       .select({
         productID: Products.productID,
