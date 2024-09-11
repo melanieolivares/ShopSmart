@@ -96,12 +96,12 @@ router.get("/check-auth", (req, res) => {
   if (token) {
     jwt.verify(token, "your-secret-key", (err, decoded) => {
       if (err) {
-        return res.status(401).json({ authenticated: false });
+        return res.status(200).json({ authenticated: false });
       }
       return res.status(200).json({ authenticated: true });
     });
   } else {
-    return res.status(401).json({ authenticated: false });
+    return res.status(200).json({ authenticated: false });
   }
 });
 

@@ -140,10 +140,12 @@ router.get("/scrape", async (req, res) => {
     //   });
     //   await browser.close();
     // }
-
     const productPage = await (async () => {
       if (brand === "Nike") {
-        const nameElement = await page.$("#pdp_product_title");
+        const parentContainer = await page.waitForSelector("#title-container");
+
+        const nameElement = await parentContainer.$("#pdp_product_title");
+
         const productName = await page.evaluate(
           (nameElement) => nameElement.innerText,
           nameElement
@@ -159,12 +161,13 @@ router.get("/scrape", async (req, res) => {
         const ogPriceElement = await page.$(
           '[data-testid="initialPrice-container"]'
         );
-        let ogPrice = await page.evaluate(
-          (ogPriceElement) => ogPriceElement.innerText,
-          ogPriceElement
-        );
-        if (ogPrice === null) {
-          ogPrice = currPrice;
+
+        let ogPrice = currPrice;
+        if (ogPriceElement !== null) {
+          ogPrice = await page.evaluate(
+            (element) => element.innerText,
+            ogPriceElement
+          );
         }
 
         let lowestPrice =
